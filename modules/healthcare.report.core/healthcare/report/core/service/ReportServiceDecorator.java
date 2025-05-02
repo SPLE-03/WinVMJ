@@ -11,7 +11,7 @@ public abstract class ReportServiceDecorator extends ReportServiceComponent{
     }
 
 	public ReportImpl createReport(Map<String, Object> requestBody){
-		return record.createReport(requestBody);
+		return (ReportImpl) record.createReport(requestBody);
 	}
 
     public Report createReport(Map<String, Object> requestBody, Map<String, Object> response){

@@ -19,16 +19,7 @@ import javax.persistence.OneToMany;
 @Table(name="report_impl")
 public class ReportImpl extends ReportComponent {
 
-	public ReportImpl(UUID reportId, UUID reportUser, String reportTitle, String reportContent, EDate createdAt) {
-		this.reportId = reportId;
-		this.reportUser = reportUser;
-		this.reportTitle = reportTitle;
-		this.reportContent = reportContent;
-		this.createdAt = createdAt;
-	}
-
-	public ReportImpl(UUID reportId, UUID reportUser, String reportTitle, String reportContent, EDate createdAt) {
-		this.reportId =  reportId.randomUUID();;
+	public ReportImpl(UUID reportId, UUID reportUser, String reportTitle, String reportContent, Date createdAt) {
 		this.reportId = reportId;
 		this.reportUser = reportUser;
 		this.reportTitle = reportTitle;
@@ -41,6 +32,7 @@ public class ReportImpl extends ReportComponent {
 
 	public boolean generate() {
 		// TODO: implement this method
+		return false;
 	}
 	
 	public HashMap<String, Object> toHashMap() {
@@ -53,5 +45,35 @@ public class ReportImpl extends ReportComponent {
 
         return reportMap;
     }
+	public UUID getReportId() {
+		return this.reportId;
+	}
+	public void setReportId(UUID reportId) {
+		this.reportId = reportId;
+	}
+	public UUID getReportUser() {
+		return this.reportUser;
+	}
+	public void setReportUser(UUID reportUser) {
+		this.reportUser = reportUser;
+	}
+	public String getReportTitle() {
+		return this.reportTitle;
+	}
+	public void setReportTitle(String reportTitle) {
+		this.reportTitle = reportTitle;
+	}
+	public String getReportContent() {
+		return this.reportContent;
+	}
+	public void setReportContent(String reportContent) {
+		this.reportContent = reportContent;
+	}
+	public Date getCreatedAt() {
+		return this.createdAt;
+	}
+	public void setCreatedAt(Date createdAt) {
+		this.createdAt = createdAt;
+	}
 
 }

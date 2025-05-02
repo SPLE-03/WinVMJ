@@ -16,13 +16,11 @@ import javax.persistence.Table;
 public abstract class ReportComponent implements Report{
 	@Id
 	public UUID reportId; 
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  reportId;
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  reportUser;
+	// @ManyToOne(targetEntity=healthcare.sercore.core.Component.class)
+	public UUID reportUser;
 	public String reportTitle;
 	public String reportContent;
-	public EDate createdAt;
+	public Date createdAt;
 	protected String objectName = ReportComponent.class.getName();
 
 	public ReportComponent() {
@@ -30,7 +28,7 @@ public abstract class ReportComponent implements Report{
 	} 
 
 	public ReportComponent(
-        UUID reportId, UUID reportUser, String reportTitle, String reportContent, EDate createdAt
+        UUID reportId, UUID reportUser, String reportTitle, String reportContent, Date createdAt
     ) {
         this.reportId = reportId;
         this.reportUser = reportUser;
@@ -51,8 +49,8 @@ public abstract class ReportComponent implements Report{
 	public abstract String getReportContent();
 	public abstract void setReportContent(String reportContent);
 	
-	public abstract EDate getCreatedAt();
-	public abstract void setCreatedAt(EDate createdAt);
+	public abstract Date getCreatedAt();
+	public abstract void setCreatedAt(Date createdAt);
 	
  
 	public abstract boolean generate();

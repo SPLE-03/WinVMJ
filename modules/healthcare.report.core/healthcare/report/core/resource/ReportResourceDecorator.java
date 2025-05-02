@@ -11,7 +11,7 @@ public abstract class ReportResourceDecorator extends ReportResourceComponent{
         this.record = record;
     }
 
-    public Report createReport(VMJExchange vmjExchange){
+    public HashMap<String, Object> createReport(VMJExchange vmjExchange){
 		return record.createReport(vmjExchange);
 	}
 

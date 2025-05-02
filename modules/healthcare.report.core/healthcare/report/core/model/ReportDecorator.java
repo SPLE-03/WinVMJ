@@ -18,7 +18,8 @@ public abstract class ReportDecorator extends ReportComponent{
 		super();
 		this.record = record;
 		this.reportId =  reportId.randomUUID();
-		
+	}	
+	
 	public ReportDecorator (ReportComponent record) {
 		this.reportId =  reportId.randomUUID();
 		this.record = record;
@@ -34,8 +35,6 @@ public abstract class ReportDecorator extends ReportComponent{
 		this.record = record;	
 		this.objectName=objectName;
 	}
-
-	public ReportDecorator() { }
 
 
 	public boolean generate() {
