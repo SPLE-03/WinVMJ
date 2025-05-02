@@ -5,7 +5,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.report.ReportFactory;
-//import prices.auth.vmj.annotations.Restricted;
+//import vmj.auth.annotations.Restricted;
 //add other required packages
 
 public class ReportResourceImpl extends ReportResourceComponent{
@@ -14,7 +14,7 @@ public class ReportResourceImpl extends ReportResourceComponent{
 
 	// @Restriced(permission = "")
     @Route(url="call/report")
-    public HashMap<String,Object> createreport(VMJExchange vmjExchange){
+    public HashMap<String,Object> createReport(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Report result = reportServiceImpl.createReport(requestBody);
@@ -62,5 +62,6 @@ public class ReportResourceImpl extends ReportResourceComponent{
 
 	public boolean generate() {
 		// TODO: implement this method
+		return true;
 	}
 }

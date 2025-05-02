@@ -21,6 +21,4 @@ public abstract class ConsultationServiceComponent implements ConsultationServic
     public abstract List<HashMap<String,Object>> transformListToHashMap(List<Consultation> List);
     public abstract List<HashMap<String,Object>> deleteConsultation(Map<String, Object> requestBody);
 	public abstract HashMap<String, Object> getConsultationById(int id);
-
-	public abstract boolean consultationUpdate(String subject, String description);
 }

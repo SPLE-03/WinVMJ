@@ -14,11 +14,12 @@ public abstract class ComplaintServiceDecorator extends ComplaintServiceComponen
     @OneToOne(cascade=CascadeType.ALL)
 	protected ComplaintServiceComponent record;
 
-	public ComplaintServiceDecorator () {
+	public ComplaintServiceDecorator() {
 		super();
 		this.record = record;
 		this.complaintServiceId =  complaintServiceId.randomUUID();
-		
+	}
+
 	public ComplaintServiceDecorator (ComplaintServiceComponent record) {
 		this.complaintServiceId =  complaintServiceId.randomUUID();
 		this.record = record;
@@ -34,9 +35,6 @@ public abstract class ComplaintServiceDecorator extends ComplaintServiceComponen
 		this.record = record;	
 		this.objectName=objectName;
 	}
-
-	public ComplaintServiceDecorator() { }
-
 
 	public boolean submitComplaint(UUID userId, String complaintSubject, String complaintMessage) {
 		return record.submitComplaint(userId, complaintSubject, complaintMessage);

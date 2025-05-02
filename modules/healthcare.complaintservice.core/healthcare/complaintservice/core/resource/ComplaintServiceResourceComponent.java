@@ -9,7 +9,7 @@ public abstract class ComplaintServiceResourceComponent implements ComplaintServ
 	
 	public ComplaintServiceResourceComponent() { }
  
-    public abstract ComplaintService createComplaintService(VMJExchange vmjExchange);    
+    public abstract HashMap<String,Object> createComplaintService(VMJExchange vmjExchange);    
 	public abstract HashMap<String, Object> updateComplaintService(VMJExchange vmjExchange);
     public abstract HashMap<String, Object> getComplaintService(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllComplaintService(VMJExchange vmjExchange);

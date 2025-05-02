@@ -12,8 +12,8 @@ public interface Report {
 	public void setReportTitle(String reportTitle);
 	public String getReportContent();
 	public void setReportContent(String reportContent);
-	public EDate getCreatedAt();
-	public void setCreatedAt(EDate createdAt);
+	public Date getCreatedAt();
+	public void setCreatedAt(Date createdAt);
 	public boolean generate();
 	HashMap<String, Object> toHashMap();
 }

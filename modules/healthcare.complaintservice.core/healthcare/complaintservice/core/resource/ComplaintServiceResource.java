@@ -4,7 +4,7 @@ import java.util.*;
 import vmj.routing.route.VMJExchange;
 
 public interface ComplaintServiceResource {
-    List<HashMap<String,Object>> saveComplaintService(VMJExchange vmjExchange);
+    // List<HashMap<String,Object>> saveComplaintService(VMJExchange vmjExchange);
     HashMap<String, Object> updateComplaintService(VMJExchange vmjExchange);
     HashMap<String, Object> getComplaintService(VMJExchange vmjExchange);
     List<HashMap<String,Object>> getAllComplaintService(VMJExchange vmjExchange);

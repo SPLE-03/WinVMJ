@@ -5,7 +5,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.consultation.ConsultationFactory;
-//import prices.auth.vmj.annotations.Restricted;
+//import vmj.auth.annotations.Restricted;
 //add other required packages
 
 public class ConsultationResourceImpl extends ConsultationResourceComponent{
@@ -14,7 +14,7 @@ public class ConsultationResourceImpl extends ConsultationResourceComponent{
 
 	// @Restriced(permission = "")
     @Route(url="call/consultation")
-    public HashMap<String,Object> createconsultation(VMJExchange vmjExchange){
+    public HashMap<String,Object> createConsultation(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Consultation result = consultationServiceImpl.createConsultation(requestBody);
@@ -58,9 +58,5 @@ public class ConsultationResourceImpl extends ConsultationResourceComponent{
 		}
 		
 		return consultationServiceImpl.deleteConsultation(requestBody);
-	}
-
-	public boolean consultationUpdate(String subject, String description) {
-		// TODO: implement this method
 	}
 }

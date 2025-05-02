@@ -9,7 +9,7 @@ public abstract class ReportResourceComponent implements ReportResource{
 	
 	public ReportResourceComponent() { }
  
-    public abstract Report createReport(VMJExchange vmjExchange);    
+    public abstract HashMap<String, Object> createReport(VMJExchange vmjExchange);    
 	public abstract HashMap<String, Object> updateReport(VMJExchange vmjExchange);
     public abstract HashMap<String, Object> getReport(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllReport(VMJExchange vmjExchange);

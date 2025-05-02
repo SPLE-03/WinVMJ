@@ -5,7 +5,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.information.InformationFactory;
-//import prices.auth.vmj.annotations.Restricted;
+//import vmj.auth.annotations.Restricted;
 //add other required packages
 
 public class InformationResourceImpl extends InformationResourceComponent{

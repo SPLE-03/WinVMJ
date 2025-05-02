@@ -11,7 +11,7 @@ public abstract class ConsultationServiceDecorator extends ConsultationServiceCo
     }
 
 	public ConsultationImpl createConsultation(Map<String, Object> requestBody){
-		return record.createConsultation(requestBody);
+		return (ConsultationImpl) record.createConsultation(requestBody);
 	}
 
     public Consultation createConsultation(Map<String, Object> requestBody, Map<String, Object> response){
@@ -45,8 +45,4 @@ public abstract class ConsultationServiceDecorator extends ConsultationServiceCo
 	public HashMap<String, Object> getConsultationById(int id){
         return record.getConsultationById(id);
     }
-
-	public boolean consultationUpdate(String subject, String description) {
-		return record.consultationUpdate(subject, description);
-	}
 }

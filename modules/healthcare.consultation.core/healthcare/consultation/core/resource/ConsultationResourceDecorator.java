@@ -11,7 +11,7 @@ public abstract class ConsultationResourceDecorator extends ConsultationResource
         this.record = record;
     }
 
-    public Consultation createConsultation(VMJExchange vmjExchange){
+    public HashMap<String, Object> createConsultation(VMJExchange vmjExchange){
 		return record.createConsultation(vmjExchange);
 	}
 
@@ -29,9 +29,5 @@ public abstract class ConsultationResourceDecorator extends ConsultationResource
 
     public List<HashMap<String,Object>> deleteConsultation(VMJExchange vmjExchange){
 		return record.deleteConsultation(vmjExchange);
-	}
-
-	public boolean consultationUpdate(String subject, String description) {
-		return record.consultationUpdate(subject, description);
 	}
 }

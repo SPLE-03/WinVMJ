@@ -15,7 +15,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.report.ReportFactory;
-import prices.auth.vmj.annotations.Restricted;
+import vmj.auth.annotations.Restricted;
 //add other required packages
 
 public class ReportServiceImpl extends ReportServiceComponent{
@@ -24,35 +24,45 @@ public class ReportServiceImpl extends ReportServiceComponent{
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		Report report = createReport(vmjExchange);
-		reportRepository.saveObject(report);
-		return getAllReport(vmjExchange);
+		Map<String, Object> requestBody = vmjExchange.getPayload();
+		Report report = createReport(requestBody);
+		Repository.saveObject(report);
+		return getAllReport(requestBody);
 	}
 
     public Report createReport(Map<String, Object> requestBody){
+		String reportUser = (String) requestBody.get("reportUser");
 		String reportTitle = (String) requestBody.get("reportTitle");
 		String reportContent = (String) requestBody.get("reportContent");
-		
+		String createdAt = (String) requestBody.get("createdAt");
 		//to do: fix association attributes
 		Report Report = ReportFactory.createReport(
 			"healthcare.report.core.ReportImpl",
-		reportId
+		UUID.randomUUID()
 		, reportUser
 		, reportTitle
 		, reportContent
 		, createdAt
 		);
-		Repository.saveObject(report);
-		return report;
+		return Report;
 	}
 
-    public Report createReport(Map<String, Object> requestBody, int id){
-		String reportTitle = (String) vmjExchange.getRequestBodyForm("reportTitle");
-		String reportContent = (String) vmjExchange.getRequestBodyForm("reportContent");
-		
+    public Report createReport(Map<String, Object> requestBody, Map<String, Object> response){
+		String reportUser = (String) requestBody.get("reportUser");
+		String reportTitle = (String) requestBody.get("reportTitle");
+		String reportContent = (String) requestBody.get("reportContent");
+		String createdAt = (String) requestBody.get("createdAt");
+
 		//to do: fix association attributes
-		
-		Report report = ReportFactory.createReport("healthcare.report.core.ReportImpl", reportId, reportUser, reportTitle, reportContent, createdAt);
+
+		Report report = ReportFactory.createReport(
+			"healthcare.report.core.ReportImpl",
+		UUID.randomUUID()
+		, reportUser
+		, reportTitle
+		, reportContent
+		, createdAt
+		);
 		return report;
 	}
 
@@ -73,9 +83,10 @@ public class ReportServiceImpl extends ReportServiceComponent{
 	}
 
     public HashMap<String, Object> getReport(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> reportList = getAllReport("report_impl");
+		int id = Integer.parseInt((String) requestBody.get("reportId"));
+		List<HashMap<String, Object>> reportList = getAllReport(requestBody);
 		for (HashMap<String, Object> report : reportList){
-			int record_id = ((Double) report.get("record_id")).intValue();
+			int record_id = Integer.parseInt((String) report.get("reportId"));
 			if (record_id == id){
 				return report;
 			}
@@ -84,9 +95,7 @@ public class ReportServiceImpl extends ReportServiceComponent{
 	}
 
 	public HashMap<String, Object> getReportById(int id){
-		String idStr = vmjExchange.getGETParam("reportId"); 
-		int id = Integer.parseInt(idStr);
-		Report report = reportRepository.getObject(id);
+		Report report = Repository.getObject(id);
 		return report.toHashMap();
 	}
 
@@ -114,5 +123,6 @@ public class ReportServiceImpl extends ReportServiceComponent{
 
 	public boolean generate() {
 		// TODO: implement this method
+		return false;
 	}
 }
