@@ -4,6 +4,11 @@ import vmj.routing.route.VMJExchange;
 import java.util.*;
 
 public interface Information {
-	org.eclipse.uml2.uml.internal.impl.ClassImpl@5e75c68 (name: InformationImpl, visibility: <unset>) (isLeaf: false, isAbstract: false, isFinalSpecialization: false) (isActive: false)org.eclipse.uml2.uml.internal.impl.RealizationImpl@4fd049bc (name: <unset>, visibility: <unset>)
+	public UUID getInformationId();
+	public void setInformationId(UUID informationId);
+	public String getInformationTitle();
+	public void setInformationTitle(String informationTitle);
+	public String getInformationDescription();
+	public void setInformationDescription(String informationDescription);
 	HashMap<String, Object> toHashMap();
 }

@@ -16,7 +16,10 @@ import javax.persistence.Table;
 public abstract class ReportComponent implements Report{
 	@Id
 	public UUID reportId; 
-	public UUID reportUser;
+	@ManyToOne(targetEntity=healthcare..core.Component.class)
+	public  reportId;
+	@ManyToOne(targetEntity=healthcare..core.Component.class)
+	public  reportUser;
 	public String reportTitle;
 	public String reportContent;
 	public EDate createdAt;

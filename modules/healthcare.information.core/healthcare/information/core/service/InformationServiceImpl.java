@@ -15,7 +15,7 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.information.InformationFactory;
-import prices.auth.vmj.annotations.Restricted;
+import vmj.auth.annotations.Restricted;
 //add other required packages
 
 public class InformationServiceImpl extends InformationServiceComponent{
@@ -24,9 +24,10 @@ public class InformationServiceImpl extends InformationServiceComponent{
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		Information information = createInformation(vmjExchange);
-		informationRepository.saveObject(information);
-		return getAllInformation(vmjExchange);
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		Information information = createInformation(requestBody);
+		Repository.saveObject(information);
+		return getAllInformation(requestBody);
 	}
 
     public Information createInformation(Map<String, Object> requestBody){
@@ -34,9 +35,9 @@ public class InformationServiceImpl extends InformationServiceComponent{
 		String informationDescription = (String) requestBody.get("informationDescription");
 		
 		//to do: fix association attributes
-		Information Information = InformationFactory.createInformation(
+		Information information = InformationFactory.createInformation(
 			"healthcare.information.core.InformationImpl",
-		informationId
+		UUID.randomUUID()
 		, informationTitle
 		, informationDescription
 		);
@@ -44,13 +45,13 @@ public class InformationServiceImpl extends InformationServiceComponent{
 		return information;
 	}
 
-    public Information createInformation(Map<String, Object> requestBody, int id){
-		String informationTitle = (String) vmjExchange.getRequestBodyForm("informationTitle");
-		String informationDescription = (String) vmjExchange.getRequestBodyForm("informationDescription");
+    public Information createInformation(Map<String, Object> requestBody, Map<String, Object> response){
+		String informationTitle = (String) requestBody.get("informationTitle");
+		String informationDescription = (String) requestBody.get("informationDescription");
 		
 		//to do: fix association attributes
 		
-		Information information = InformationFactory.createInformation("healthcare.information.core.InformationImpl", informationId, informationTitle, informationDescription);
+		Information information = InformationFactory.createInformation("healthcare.information.core.InformationImpl", UUID.randomUUID(), informationTitle, informationDescription);
 		return information;
 	}
 
@@ -71,7 +72,8 @@ public class InformationServiceImpl extends InformationServiceComponent{
 	}
 
     public HashMap<String, Object> getInformation(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> informationList = getAllInformation("information_impl");
+    	int id = ((Double) requestBody.get("record_id")).intValue();
+		List<HashMap<String, Object>> informationList = getAllInformation(requestBody);
 		for (HashMap<String, Object> information : informationList){
 			int record_id = ((Double) information.get("record_id")).intValue();
 			if (record_id == id){
@@ -82,11 +84,10 @@ public class InformationServiceImpl extends InformationServiceComponent{
 	}
 
 	public HashMap<String, Object> getInformationById(int id){
-		String idStr = vmjExchange.getGETParam("informationId"); 
-		int id = Integer.parseInt(idStr);
-		Information information = informationRepository.getObject(id);
+		Information information = Repository.getObject(id);
 		return information.toHashMap();
 	}
+
 
     public List<HashMap<String,Object>> getAllInformation(Map<String, Object> requestBody){
 		String table = (String) requestBody.get("table_name");

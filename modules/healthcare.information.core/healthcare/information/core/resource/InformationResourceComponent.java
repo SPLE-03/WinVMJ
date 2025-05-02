@@ -9,9 +9,7 @@ public abstract class InformationResourceComponent implements InformationResourc
 	
 	public InformationResourceComponent() { }
  
-    public abstract List<HashMap<String,Object>> saveInformation(VMJExchange vmjExchange);
-    public abstract Information createInformation(VMJExchange vmjExchange);
-	public abstract Information createInformation(VMJExchange vmjExchange, int id);    
+    public abstract HashMap<String, Object> createInformation(VMJExchange vmjExhange);    
 	public abstract HashMap<String, Object> updateInformation(VMJExchange vmjExchange);
     public abstract HashMap<String, Object> getInformation(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllInformation(VMJExchange vmjExchange);

@@ -5,28 +5,16 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.information.InformationFactory;
-import prices.auth.vmj.annotations.Restricted;
+//import prices.auth.vmj.annotations.Restricted;
 //add other required packages
-
 
 public class InformationResourceImpl extends InformationResourceComponent{
 	
 	private InformationServiceImpl informationServiceImpl = new InformationServiceImpl();
 
 	// @Restriced(permission = "")
-    @Route(url="call/information/save")
-    public List<HashMap<String,Object>> saveInformation(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
-		}
-		Information information = createInformation(vmjExchange);
-		informationRepository.saveObject(information);
-		return getAllInformation(vmjExchange);
-	}
-
-	// @Restriced(permission = "")
     @Route(url="call/information")
-    public HashMap<String,Object> information(VMJExchange vmjExchange){
+    public HashMap<String,Object> createInformation(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Information result = informationServiceImpl.createInformation(requestBody);
@@ -35,25 +23,7 @@ public class InformationResourceImpl extends InformationResourceComponent{
 		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Information createInformation(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Information result = informationServiceImpl.createInformation(requestBody);
-			return result.toHashMap();
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
-    public Information createInformation(VMJExchange vmjExchange, int id){
-		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
-			Information result = informationServiceImpl.createInformation(requestBody, id);
-			return result.toHashMap();
-		}
-		throw new NotFoundException("Route tidak ditemukan");
-	}
-
-	// @Restriced(permission = "")
+    // @Restriced(permission = "")
     @Route(url="call/information/update")
     public HashMap<String, Object> updateInformation(VMJExchange vmjExchange){
 		Map<String, Object> requestBody = vmjExchange.getPayload(); 
@@ -78,6 +48,7 @@ public class InformationResourceImpl extends InformationResourceComponent{
 		return informationServiceImpl.getAllInformation(requestBody);
 	}
 
+    
 	// @Restriced(permission = "")
     @Route(url="call/information/delete")
     public List<HashMap<String,Object>> deleteInformation(VMJExchange vmjExchange){
@@ -88,6 +59,5 @@ public class InformationResourceImpl extends InformationResourceComponent{
 		
 		return informationServiceImpl.deleteInformation(requestBody);
 	}
-
 
 }

@@ -11,16 +11,8 @@ public abstract class InformationResourceDecorator extends InformationResourceCo
         this.record = record;
     }
 
-    public List<HashMap<String,Object>> saveInformation(VMJExchange vmjExchange){
-		return record.saveInformation(vmjExchange);
-	}
-
-    public Information createInformation(VMJExchange vmjExchange){
+    public HashMap<String, Object> createInformation(VMJExchange vmjExchange){
 		return record.createInformation(vmjExchange);
-	}
-
-    public Information createInformation(VMJExchange vmjExchange, int id){
-		return record.createInformation(vmjExchange, id);
 	}
 
     public HashMap<String, Object> updateInformation(VMJExchange vmjExchange){

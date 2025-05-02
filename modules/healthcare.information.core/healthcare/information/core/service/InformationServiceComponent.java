@@ -13,10 +13,9 @@ public abstract class InformationServiceComponent implements InformationService{
     }	
 
     public abstract List<HashMap<String,Object>> saveInformation(VMJExchange vmjExchange);
-    public abstract Information createInformation(Map<String, Object> requestBodye);
+    public abstract Information createInformation(Map<String, Object> requestBody);
 	public abstract Information createInformation(Map<String, Object> requestBody, Map<String, Object> response);    
 	public abstract HashMap<String, Object> updateInformation(Map<String, Object> requestBody);
-    public abstract HashMap<String, Object> getInformation(Map<String, Object> requestBody);
     public abstract List<HashMap<String,Object>> getAllInformation(Map<String, Object> requestBody);
     public abstract List<HashMap<String,Object>> transformListToHashMap(List<Information> List);
     public abstract List<HashMap<String,Object>> deleteInformation(Map<String, Object> requestBody);

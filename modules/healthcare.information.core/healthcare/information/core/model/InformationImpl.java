@@ -24,15 +24,34 @@ public class InformationImpl extends InformationComponent {
 		this.informationTitle = informationTitle;
 		this.informationDescription = informationDescription;
 	}
-
-	public InformationImpl(UUID informationId, String informationTitle, String informationDescription) {
-		this.informationId =  informationId.randomUUID();;
-		this.informationId = informationId;
-		this.informationTitle = informationTitle;
-		this.informationDescription = informationDescription;
+	
+	public InformationImpl() {
+	}
+	
+	public UUID getInformationId() {
+		return this.informationId;
 	}
 
-	public InformationImpl() { }
+	public void setInformationId(UUID informationId) {
+		this.informationId = informationId;
+	}
+
+
+	public String getInformationTitle() {
+		return this.informationTitle;
+	}
+
+	public void setInformationTitle(String informationTitle) {
+		this.informationTitle = informationTitle;
+	}
+
+	public String getInformationDescription() {
+		return this.informationDescription;
+	}
+
+	public void setInformationDescription(String informationDescription) {
+		this.informationDescription = informationDescription;
+	}
 
 
 	

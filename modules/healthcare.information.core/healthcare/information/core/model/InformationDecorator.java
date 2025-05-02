@@ -36,8 +36,6 @@ public abstract class InformationDecorator extends InformationComponent{
 		this.objectName=objectName;
 	}
 
-	public InformationDecorator() { }
-
 
 
 	public HashMap<String, Object> toHashMap() {
