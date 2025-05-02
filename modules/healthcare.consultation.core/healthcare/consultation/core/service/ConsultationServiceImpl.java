@@ -24,9 +24,10 @@ public class ConsultationServiceImpl extends ConsultationServiceComponent{
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		Consultation consultation = createConsultation(vmjExchange);
-		consultationRepository.saveObject(consultation);
-		return getAllConsultation(vmjExchange);
+		Map<String, Object> requestBody = vmjExchange.getPayload();
+		Consultation consultation = createConsultation(requestBody);
+		Repository.saveObject(consultation);
+		return getAllConsultation(requestBody);
 	}
 
     public Consultation createConsultation(Map<String, Object> requestBody){
@@ -37,23 +38,23 @@ public class ConsultationServiceImpl extends ConsultationServiceComponent{
 		//to do: fix association attributes
 		Consultation Consultation = ConsultationFactory.createConsultation(
 			"healthcare.consultation.core.ConsultationImpl",
-		consultationId
+		UUID.randomUUID()
 		, consultationSubject
 		, consultationDescription
 		, consultationStatus
 		);
-		Repository.saveObject(consultation);
-		return consultation;
+		Repository.saveObject(Consultation);
+		return Consultation;
 	}
 
-    public Consultation createConsultation(Map<String, Object> requestBody, int id){
-		String consultationSubject = (String) vmjExchange.getRequestBodyForm("consultationSubject");
-		String consultationDescription = (String) vmjExchange.getRequestBodyForm("consultationDescription");
-		boolean consultationStatus = (boolean) vmjExchange.getRequestBodyForm("consultationStatus");
+    public Consultation createConsultation(Map<String, Object> requestBody, Map<String, Object> responses){
+		String consultationSubject = (String) requestBody.get("consultationSubject");
+		String consultationDescription = (String) requestBody.get("consultationDescription");
+		boolean consultationStatus = (boolean) requestBody.get("consultationStatus");
 		
 		//to do: fix association attributes
 		
-		Consultation consultation = ConsultationFactory.createConsultation("healthcare.consultation.core.ConsultationImpl", consultationId, consultationSubject, consultationDescription, consultationStatus);
+		Consultation consultation = ConsultationFactory.createConsultation("healthcare.consultation.core.ConsultationImpl", UUID.randomUUID(), consultationSubject, consultationDescription, consultationStatus);
 		return consultation;
 	}
 
@@ -64,7 +65,7 @@ public class ConsultationServiceImpl extends ConsultationServiceComponent{
 		
 		consultation.setConsultationSubject((String) requestBody.get("consultationSubject"));
 		consultation.setConsultationDescription((String) requestBody.get("consultationDescription"));
-		consultation.setConsultationStatus((String) requestBody.get("consultationStatus"));
+		consultation.setConsultationStatus((Boolean) requestBody.get("consultationStatus"));
 		
 		Repository.updateObject(consultation);
 		
@@ -75,7 +76,8 @@ public class ConsultationServiceImpl extends ConsultationServiceComponent{
 	}
 
     public HashMap<String, Object> getConsultation(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> consultationList = getAllConsultation("consultation_impl");
+    	int id = ((Double) requestBody.get("record_id")).intValue();
+		List<HashMap<String, Object>> consultationList = getAllConsultation(requestBody);
 		for (HashMap<String, Object> consultation : consultationList){
 			int record_id = ((Double) consultation.get("record_id")).intValue();
 			if (record_id == id){
@@ -86,9 +88,7 @@ public class ConsultationServiceImpl extends ConsultationServiceComponent{
 	}
 
 	public HashMap<String, Object> getConsultationById(int id){
-		String idStr = vmjExchange.getGETParam("consultationId"); 
-		int id = Integer.parseInt(idStr);
-		Consultation consultation = consultationRepository.getObject(id);
+		Consultation consultation = Repository.getObject(id);
 		return consultation.toHashMap();
 	}
 
@@ -112,9 +112,5 @@ public class ConsultationServiceImpl extends ConsultationServiceComponent{
 		int id = Integer.parseInt(idStr);
 		Repository.deleteObject(id);
 		return getAllConsultation(requestBody);
-	}
-
-	public boolean consultationUpdate(String subject, String description) {
-		// TODO: implement this method
 	}
 }

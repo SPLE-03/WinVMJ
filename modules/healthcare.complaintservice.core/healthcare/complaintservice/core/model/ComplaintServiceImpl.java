@@ -26,19 +26,43 @@ public class ComplaintServiceImpl extends ComplaintServiceComponent {
 		this.complaintMessage = complaintMessage;
 	}
 
-	public ComplaintServiceImpl(UUID complaintServiceId, UUID complaintServiceUser, String complaintSubject, String complaintMessage) {
-		this.complaintServiceId =  complaintServiceId.randomUUID();;
+	public ComplaintServiceImpl() { }
+
+	public UUID getComplaintServiceId() {
+		return this.complaintServiceId;
+	}
+
+	public void setComplaintServiceId(UUID complaintServiceId) {
 		this.complaintServiceId = complaintServiceId;
+	}
+
+
+	public UUID getComplaintServiceUser() {
+		return this.complaintServiceUser;
+	}
+
+	public void setComplaintServiceUser(UUID complaintServiceUser) {
 		this.complaintServiceUser = complaintServiceUser;
+	}
+
+	public String getComplaintSubject() {
+		return this.complaintSubject;
+	}
+
+	public void setComplaintSubject(String complaintSubject) {
 		this.complaintSubject = complaintSubject;
+	}
+	public String getComplaintMessage() {
+		return this.complaintMessage;
+	}
+
+	public void setComplaintMessage(String complaintMessage) {
 		this.complaintMessage = complaintMessage;
 	}
 
-	public ComplaintServiceImpl() { }
-
-
 	public boolean submitComplaint(UUID userId, String complaintSubject, String complaintMessage) {
 		// TODO: implement this method
+		return true;
 	}
 	
 	public HashMap<String, Object> toHashMap() {

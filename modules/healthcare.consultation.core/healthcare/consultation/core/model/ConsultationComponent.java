@@ -16,8 +16,6 @@ import javax.persistence.Table;
 public abstract class ConsultationComponent implements Consultation{
 	@Id
 	public UUID consultationId; 
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  consultationId;
 	public String consultationSubject;
 	public String consultationDescription;
 	public boolean consultationStatus;
@@ -48,9 +46,6 @@ public abstract class ConsultationComponent implements Consultation{
 	public abstract boolean getConsultationStatus();
 	public abstract void setConsultationStatus(boolean consultationStatus);
 	
- 
-	public abstract boolean consultationUpdate(String subject, String description);
-
 	@Override
     public String toString() {
         return "{" +

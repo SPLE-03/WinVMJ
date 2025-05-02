@@ -26,19 +26,31 @@ public class ConsultationImpl extends ConsultationComponent {
 		this.consultationStatus = consultationStatus;
 	}
 
-	public ConsultationImpl(UUID consultationId, String consultationSubject, String consultationDescription, boolean consultationStatus) {
-		this.consultationId =  consultationId.randomUUID();;
-		this.consultationId = consultationId;
-		this.consultationSubject = consultationSubject;
-		this.consultationDescription = consultationDescription;
-		this.consultationStatus = consultationStatus;
-	}
-
 	public ConsultationImpl() { }
 
-
-	public boolean consultationUpdate(String subject, String description) {
-		// TODO: implement this method
+	public UUID getConsultationId() {
+		return this.consultationId;
+	}
+	public void setConsultationId(UUID consultationId) {
+		this.consultationId = consultationId;
+	}
+	public String getConsultationSubject() {
+		return this.consultationSubject;
+	}
+	public void setConsultationSubject(String consultationSubject) {
+		this.consultationSubject = consultationSubject;
+	}
+	public String getConsultationDescription() {
+		return this.consultationDescription;
+	}
+	public void setConsultationDescription(String consultationDescription) {
+		this.consultationDescription = consultationDescription;
+	}
+	public boolean getConsultationStatus() {
+		return this.consultationStatus;
+	}
+	public void setConsultationStatus(boolean consultationStatus) {
+		this.consultationStatus = consultationStatus;
 	}
 	
 	public HashMap<String, Object> toHashMap() {

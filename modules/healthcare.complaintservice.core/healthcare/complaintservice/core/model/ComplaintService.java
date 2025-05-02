@@ -12,6 +12,6 @@ public interface ComplaintService {
 	public void setComplaintSubject(String complaintSubject);
 	public String getComplaintMessage();
 	public void setComplaintMessage(String complaintMessage);
-	public boolean submitComplaint(String complaintSubject, String complaintMessage);
+	public boolean submitComplaint(UUID userId, String complaintSubject, String complaintMessage);
 	HashMap<String, Object> toHashMap();
 }
