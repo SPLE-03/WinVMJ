@@ -14,9 +14,9 @@ public class SpecialServicesResourceImpl extends SpecialServicesResourceComponen
 
 	// @Restriced(permission = "")
     @Route(url="call/specialservices")
-    public HashMap<String,Object> createspecialservices(VMJExchange vmjExchange){
+    public HashMap<String,Object> createSpecialServices(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
-		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
+			Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			SpecialServices result = specialservicesServiceImpl.createSpecialServices(requestBody);
 			return result.toHashMap();
 		}
@@ -62,21 +62,26 @@ public class SpecialServicesResourceImpl extends SpecialServicesResourceComponen
 
 	public int calculatePrice() {
 		// TODO: implement this method
+		return 0;
 	}
 
 	public boolean isAvailable() {
 		// TODO: implement this method
+		return false;
 	}
 
 	public boolean callService(UUID id) {
 		// TODO: implement this method
+		return false;
 	}
 
 	public String getDetails(UUID id) {
 		// TODO: implement this method
+		return "";
 	}
 
 	public boolean cancelService(UUID id) {
 		// TODO: implement this method
+		return false;
 	}
 }

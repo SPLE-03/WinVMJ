@@ -20,17 +20,7 @@ import javax.persistence.OneToMany;
 public class SpecialServicesImpl extends SpecialServicesComponent {
 
 	public SpecialServicesImpl(UUID specialServicesId, int price, int distance, boolean available, String details, UUID specialServicesUser) {
-		this.specialServicesId = specialServicesId;
-		this.price = price;
-		this.distance = distance;
-		this.available = available;
-		this.details = details;
-		this.specialServicesUser = specialServicesUser;
-	}
-
-	public SpecialServicesImpl(UUID specialServicesId, int price, int distance, boolean available, String details, UUID specialServicesUser) {
-		this.specialServicesId =  specialServicesId.randomUUID();;
-		this.specialServicesId = specialServicesId;
+		this.specialServicesId =  specialServicesId.randomUUID();
 		this.price = price;
 		this.distance = distance;
 		this.available = available;
@@ -43,22 +33,75 @@ public class SpecialServicesImpl extends SpecialServicesComponent {
 
 	public int calculatePrice() {
 		// TODO: implement this method
+		return 0;
 	}
 
 	public boolean isAvailable() {
 		// TODO: implement this method
+		return false;
 	}
 
 	public boolean callService(UUID id) {
 		// TODO: implement this method
+		return false;
 	}
 
 	public String getDetails(UUID id) {
 		// TODO: implement this method
+		return "";
 	}
 
 	public boolean cancelService(UUID id) {
 		// TODO: implement this method
+		return false;
+	}
+
+	public void setSpecialServicesUser(UUID specialServicesUser) {
+		this.specialServicesUser = specialServicesUser;
+	}
+
+	public UUID getSpecialServicesUser() {
+		return this.specialServicesUser;
+	}
+
+	public void setDetails(String details) {
+		this.details = details;
+	}
+
+	public String getDetails() {
+		return this.details;
+	}
+
+	public void setAvailable(boolean available) {
+		this.available = available;
+	}
+
+	public boolean getAvailable() {
+		return this.available;
+	}
+
+	public void setDistance(int distance) {
+		this.distance = distance;
+	}
+
+	public int getDistance() {
+		return this.distance;
+	}
+
+	public void setPrice(int price) {
+		this.price = price;
+	}
+
+	public int getPrice() {
+		return this.price;
+	}
+
+	public void setSpecialServicesId(UUID specialServicesId) {
+		this.specialServicesId = specialServicesId;
+	}
+
+	public UUID getSpecialServicesId() {
+		return this.specialServicesId;
 	}
 	
 	public HashMap<String, Object> toHashMap() {

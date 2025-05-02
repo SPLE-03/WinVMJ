@@ -9,7 +9,7 @@ public abstract class SpecialServicesResourceComponent implements SpecialService
 	
 	public SpecialServicesResourceComponent() { }
  
-    public abstract SpecialServices createSpecialServices(VMJExchange vmjExchange);    
+    public abstract HashMap<String, Object> createSpecialServices(VMJExchange vmjExchange);    
 	public abstract HashMap<String, Object> updateSpecialServices(VMJExchange vmjExchange);
     public abstract HashMap<String, Object> getSpecialServices(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllSpecialServices(VMJExchange vmjExchange);

@@ -11,7 +11,7 @@ public abstract class SpecialServicesResourceDecorator extends SpecialServicesRe
         this.record = record;
     }
 
-    public SpecialServices createSpecialServices(VMJExchange vmjExchange){
+    public HashMap<String, Object> createSpecialServices(VMJExchange vmjExchange){
 		return record.createSpecialServices(vmjExchange);
 	}
 

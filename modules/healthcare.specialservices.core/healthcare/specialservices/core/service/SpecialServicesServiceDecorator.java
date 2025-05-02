@@ -10,12 +10,8 @@ public abstract class SpecialServicesServiceDecorator extends SpecialServicesSer
         this.record = record;
     }
 
-	public SpecialServicesImpl createSpecialServices(Map<String, Object> requestBody){
+	public SpecialServices createSpecialServices(Map<String, Object> requestBody){
 		return record.createSpecialServices(requestBody);
-	}
-
-    public SpecialServices createSpecialServices(Map<String, Object> requestBody, Map<String, Object> response){
-		return record.createSpecialServices(requestBody, response);
 	}
 
 	public HashMap<String, Object> getSpecialServices(Map<String, Object> requestBody){
@@ -42,8 +38,8 @@ public abstract class SpecialServicesServiceDecorator extends SpecialServicesSer
 		return record.deleteSpecialServices(requestBody);
 	}
 
-	public HashMap<String, Object> getSpecialServicesById(int id){
-        return record.getSpecialServicesById(id);
+	public HashMap<String, Object> getSpecialServicesById(VMJExchange vmjExchange){
+        return record.getSpecialServicesById(vmjExchange);
     }
 
 	public int calculatePrice() {

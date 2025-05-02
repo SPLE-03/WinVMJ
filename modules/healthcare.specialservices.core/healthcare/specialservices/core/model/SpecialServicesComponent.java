@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.persistence.ManyToOne;
 
 @Entity
 @Table(name="specialservices_comp")
@@ -16,14 +17,12 @@ import javax.persistence.Table;
 public abstract class SpecialServicesComponent implements SpecialServices{
 	@Id
 	public UUID specialServicesId; 
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  specialServicesId;
 	public int price;
 	public int distance;
 	public boolean available;
 	public String details;
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  specialServicesUser;
+//	@ManyToOne(targetEntity=healthcare.sercore.core.Component.class)// TODO: fix this later
+	public UUID specialServicesUser;//TODO: change this to winVMJ user
 	protected String objectName = SpecialServicesComponent.class.getName();
 
 	public SpecialServicesComponent() {

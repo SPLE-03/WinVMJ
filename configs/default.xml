@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
-	<feature name="HealthCare"/>
-	<feature name="Consultation"/>
-	<feature name="ChatConsultation"/>
+	<feature automatic="selected" name="HealthCare"/>
+	<feature automatic="selected" name="Consultation"/>
+	<feature automatic="selected" name="ChatConsultation"/>
 	<feature name="OfflineConsultation"/>
-	<feature name="Information"/>
+	<feature automatic="selected" name="Information"/>
 	<feature name="HealthArticle"/>
 	<feature name="FacilityLocation"/>
 	<feature name="Report"/>
 	<feature name="PatientReport"/>
 	<feature name="DoctorReport"/>
-	<feature name="SpecialServices"/>
+	<feature manual="selected" name="SpecialServices"/>
 	<feature name="InHouseDoctor"/>
 	<feature name="Emergency"/>
 	<feature name="ComplaintService"/>

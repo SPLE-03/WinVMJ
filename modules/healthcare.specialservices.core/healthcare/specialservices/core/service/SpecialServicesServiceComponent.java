@@ -12,15 +12,14 @@ public abstract class SpecialServicesServiceComponent implements SpecialServices
         this.Repository = new RepositoryUtil<SpecialServices>(healthcare.specialservices.core.SpecialServicesComponent.class);
     }	
 
+    public abstract SpecialServices createSpecialServices(Map<String, Object> requestBody);
+	public abstract HashMap<String, Object> getSpecialServices(Map<String, Object> requestBody);
     public abstract List<HashMap<String,Object>> saveSpecialServices(VMJExchange vmjExchange);
-    public abstract SpecialServices createSpecialServices(Map<String, Object> requestBodye);
-	public abstract SpecialServices createSpecialServices(Map<String, Object> requestBody, Map<String, Object> response);    
-	public abstract HashMap<String, Object> updateSpecialServices(Map<String, Object> requestBody);
-    public abstract HashMap<String, Object> getSpecialServices(Map<String, Object> requestBody);
+    public abstract HashMap<String, Object> updateSpecialServices(Map<String, Object> requestBody);
+    public abstract HashMap<String, Object> getSpecialServicesById(VMJExchange vmjExchange);
     public abstract List<HashMap<String,Object>> getAllSpecialServices(Map<String, Object> requestBody);
-    public abstract List<HashMap<String,Object>> transformListToHashMap(List<SpecialServices> List);
     public abstract List<HashMap<String,Object>> deleteSpecialServices(Map<String, Object> requestBody);
-	public abstract HashMap<String, Object> getSpecialServicesById(int id);
+	public abstract List<HashMap<String, Object>> transformListToHashMap(List<SpecialServices> List);
 
 	public abstract int calculatePrice();
 

@@ -18,7 +18,8 @@ public abstract class SpecialServicesDecorator extends SpecialServicesComponent{
 		super();
 		this.record = record;
 		this.specialServicesId =  specialServicesId.randomUUID();
-		
+	}
+	
 	public SpecialServicesDecorator (SpecialServicesComponent record) {
 		this.specialServicesId =  specialServicesId.randomUUID();
 		this.record = record;
@@ -34,9 +35,6 @@ public abstract class SpecialServicesDecorator extends SpecialServicesComponent{
 		this.record = record;	
 		this.objectName=objectName;
 	}
-
-	public SpecialServicesDecorator() { }
-
 
 	public int calculatePrice() {
 		return record.calculatePrice();
