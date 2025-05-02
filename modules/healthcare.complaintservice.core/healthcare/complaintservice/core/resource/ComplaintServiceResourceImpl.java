@@ -14,7 +14,7 @@ public class ComplaintServiceResourceImpl extends ComplaintServiceResourceCompon
 
 	// @Restriced(permission = "")
     @Route(url="call/complaintservice")
-    public HashMap<String,Object> createcomplaintservice(VMJExchange vmjExchange){
+    public HashMap<String,Object> createComplaintService(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			ComplaintService result = complaintserviceServiceImpl.createComplaintService(requestBody);
@@ -62,5 +62,6 @@ public class ComplaintServiceResourceImpl extends ComplaintServiceResourceCompon
 
 	public boolean submitComplaint(UUID userId, String complaintSubject, String complaintMessage) {
 		// TODO: implement this method
+		return true;
 	}
 }

@@ -11,7 +11,7 @@ public abstract class ComplaintServiceResourceDecorator extends ComplaintService
         this.record = record;
     }
 
-    public ComplaintService createComplaintService(VMJExchange vmjExchange){
+    public HashMap<String, Object> createComplaintService(VMJExchange vmjExchange){
 		return record.createComplaintService(vmjExchange);
 	}
 

@@ -15,7 +15,6 @@ import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 import vmj.routing.route.exceptions.*;
 import healthcare.complaintservice.ComplaintServiceFactory;
-import prices.auth.vmj.annotations.Restricted;
 //add other required packages
 
 public class ComplaintServiceServiceImpl extends ComplaintServiceServiceComponent{
@@ -24,19 +23,21 @@ public class ComplaintServiceServiceImpl extends ComplaintServiceServiceComponen
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		ComplaintService complaintservice = createComplaintService(vmjExchange);
-		complaintserviceRepository.saveObject(complaintservice);
-		return getAllComplaintService(vmjExchange);
+		Map<String, Object> requestBody = vmjExchange.getPayload(); 
+		ComplaintService complaintservice = createComplaintService(requestBody);
+		Repository.saveObject(complaintservice);
+		return getAllComplaintService(requestBody);
 	}
 
     public ComplaintService createComplaintService(Map<String, Object> requestBody){
 		String complaintSubject = (String) requestBody.get("complaintSubject");
 		String complaintMessage = (String) requestBody.get("complaintMessage");
-		
+		String complaintServiceUser = (String) requestBody.get("complaintServiceUser");
+
 		//to do: fix association attributes
-		ComplaintService ComplaintService = ComplaintServiceFactory.createComplaintService(
+		ComplaintService complaintservice = ComplaintServiceFactory.createComplaintService(
 			"healthcare.complaintservice.core.ComplaintServiceImpl",
-		complaintServiceId
+		UUID.randomUUID()
 		, complaintServiceUser
 		, complaintSubject
 		, complaintMessage
@@ -45,13 +46,14 @@ public class ComplaintServiceServiceImpl extends ComplaintServiceServiceComponen
 		return complaintservice;
 	}
 
-    public ComplaintService createComplaintService(Map<String, Object> requestBody, int id){
-		String complaintSubject = (String) vmjExchange.getRequestBodyForm("complaintSubject");
-		String complaintMessage = (String) vmjExchange.getRequestBodyForm("complaintMessage");
+    public ComplaintService createComplaintService(Map<String, Object> requestBody, Map<String, Object> response){
+		String complaintSubject = (String) requestBody.get("complaintSubject");
+		String complaintMessage = (String) requestBody.get("complaintMessage");
+		String complaintServiceUser = (String) requestBody.get("complaintServiceUser");
 		
 		//to do: fix association attributes
 		
-		ComplaintService complaintservice = ComplaintServiceFactory.createComplaintService("healthcare.complaintservice.core.ComplaintServiceImpl", complaintServiceId, complaintServiceUser, complaintSubject, complaintMessage);
+		ComplaintService complaintservice = ComplaintServiceFactory.createComplaintService("healthcare.complaintservice.core.ComplaintServiceImpl", UUID.randomUUID(), complaintServiceUser, complaintSubject, complaintMessage);
 		return complaintservice;
 	}
 
@@ -72,7 +74,8 @@ public class ComplaintServiceServiceImpl extends ComplaintServiceServiceComponen
 	}
 
     public HashMap<String, Object> getComplaintService(Map<String, Object> requestBody){
-		List<HashMap<String, Object>> complaintserviceList = getAllComplaintService("complaintservice_impl");
+		int id = ((Double) requestBody.get("record_id")).intValue();
+		List<HashMap<String, Object>> complaintserviceList = getAllComplaintService(requestBody);
 		for (HashMap<String, Object> complaintservice : complaintserviceList){
 			int record_id = ((Double) complaintservice.get("record_id")).intValue();
 			if (record_id == id){
@@ -83,9 +86,7 @@ public class ComplaintServiceServiceImpl extends ComplaintServiceServiceComponen
 	}
 
 	public HashMap<String, Object> getComplaintServiceById(int id){
-		String idStr = vmjExchange.getGETParam("complaintServiceId"); 
-		int id = Integer.parseInt(idStr);
-		ComplaintService complaintservice = complaintserviceRepository.getObject(id);
+		ComplaintService complaintservice = Repository.getObject(id);
 		return complaintservice.toHashMap();
 	}
 
@@ -113,5 +114,6 @@ public class ComplaintServiceServiceImpl extends ComplaintServiceServiceComponen
 
 	public boolean submitComplaint(UUID userId, String complaintSubject, String complaintMessage) {
 		// TODO: implement this method
+		return true;
 	}
 }

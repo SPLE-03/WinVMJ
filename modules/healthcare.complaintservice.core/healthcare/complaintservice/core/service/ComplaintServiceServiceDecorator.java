@@ -10,7 +10,7 @@ public abstract class ComplaintServiceServiceDecorator extends ComplaintServiceS
         this.record = record;
     }
 
-	public ComplaintServiceImpl createComplaintService(Map<String, Object> requestBody){
+	public ComplaintService createComplaintService(Map<String, Object> requestBody){
 		return record.createComplaintService(requestBody);
 	}
 

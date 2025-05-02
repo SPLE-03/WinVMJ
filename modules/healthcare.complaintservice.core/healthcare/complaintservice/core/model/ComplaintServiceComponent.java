@@ -16,10 +16,8 @@ import javax.persistence.Table;
 public abstract class ComplaintServiceComponent implements ComplaintService{
 	@Id
 	public UUID complaintServiceId; 
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  complaintServiceId;
-	@ManyToOne(targetEntity=healthcare..core.Component.class)
-	public  complaintServiceUser;
+	// @ManyToOne(targetEntity=healthcare.sercore.core.Component.class)
+	public UUID complaintServiceUser;
 	public String complaintSubject;
 	public String complaintMessage;
 	protected String objectName = ComplaintServiceComponent.class.getName();
