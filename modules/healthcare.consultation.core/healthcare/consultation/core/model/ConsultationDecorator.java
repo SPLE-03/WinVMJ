@@ -18,7 +18,7 @@ public abstract class ConsultationDecorator extends ConsultationComponent{
 		super();
 		this.record = record;
 		this.consultationId =  consultationId.randomUUID();
-		
+	}
 	public ConsultationDecorator (ConsultationComponent record) {
 		this.consultationId =  consultationId.randomUUID();
 		this.record = record;
@@ -33,13 +33,6 @@ public abstract class ConsultationDecorator extends ConsultationComponent{
 		this.consultationId =  consultationId.randomUUID();
 		this.record = record;	
 		this.objectName=objectName;
-	}
-
-	public ConsultationDecorator() { }
-
-
-	public boolean consultationUpdate(String subject, String description) {
-		return record.consultationUpdate(subject, description);
 	}
 
 	public HashMap<String, Object> toHashMap() {

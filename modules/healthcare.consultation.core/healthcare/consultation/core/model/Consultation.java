@@ -12,6 +12,5 @@ public interface Consultation {
 	public void setConsultationDescription(String consultationDescription);
 	public boolean getConsultationStatus();
 	public void setConsultationStatus(boolean consultationStatus);
-	public boolean update(String subject, String description);
 	HashMap<String, Object> toHashMap();
 }
