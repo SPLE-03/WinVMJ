@@ -14,7 +14,7 @@ public class ConsultationResourceImpl extends ConsultationResourceComponent{
 
 	// @Restriced(permission = "")
     @Route(url="call/consultation")
-    public HashMap<String,Object> createconsultation(VMJExchange vmjExchange){
+    public HashMap<String,Object> createConsultation(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("POST")) {
 		    Map<String, Object> requestBody = vmjExchange.getPayload(); 
 			Consultation result = consultationServiceImpl.createConsultation(requestBody);
@@ -58,9 +58,5 @@ public class ConsultationResourceImpl extends ConsultationResourceComponent{
 		}
 		
 		return consultationServiceImpl.deleteConsultation(requestBody);
-	}
-
-	public boolean consultationUpdate(String subject, String description) {
-		// TODO: implement this method
 	}
 }
