@@ -1,1 +1,47 @@
-{}
+{
+  "Consultation": [
+    "healthcare.consultation.core"
+  ],
+  "ChatConsultation": [
+    "healthcare.consultation.chatconsultation"
+  ],
+  "OfflineConsultation": [
+    "healthcare.consultation.offlineconsultation"
+  ],
+  "Information": [
+    "healthcare.information.core"
+  ],
+  "HealthArticle": [
+    "healthcare.information.article"
+  ],
+  "FacilityLocation": [
+    "healthcare.information.facilitylocation"
+  ],
+  "Report": [
+    "healthcare.report.core"
+  ],
+  "PatientReport": [
+    "healthcare.report.patientreport"
+  ],
+  "DoctorReport": [
+    "healthcare.report.doctorreport"
+  ],
+  "SpecialServices": [
+    "healthcare.specialservices.core"
+  ],
+  "InHouseDoctor": [
+    "healthcare.specialservices.inhousedoctor"
+  ],
+  "Emergency": [
+    "healthcare.specialservices.emergency"
+  ],
+  "ComplaintService": [
+    "healthcare.complaintservice.core"
+  ],
+  "ConsultationComplaint": [
+    "healthcare.complaintservice.consultationcomplaint"
+  ],
+  "SpecialServiceComplaint": [
+    "healthcare.complaintservice.specialservicecomplaint"
+  ]
+}

@@ -3,12 +3,11 @@ namespace HealthCare
 features
 	HealthCare {abstract true}
 		mandatory
-			Consultation {abstract true}
-				mandatory
-					ChatConsultation
+			Consultation
 				optional
+					ChatConsultation
 					OfflineConsultation
-			Information {abstract true}
+			Information
 				optional
 					HealthArticle
 					FacilityLocation
