@@ -5,6 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.Id;
 import javax.persistence.Column;
+import javax.persistence.ManyToOne;
+import javax.persistence.JoinColumn;
 
 @Entity
 @Table(name="chat_message")
@@ -21,6 +23,10 @@ public class ChatMessage {
     @Column(name="sender_id")
     private UUID senderId;
     
+    @Column(name="consultation_id", insertable = false, updatable = false)
+    private UUID consultationId;
+    
+    // Constructors
     public ChatMessage() {
         this.id = UUID.randomUUID();
         this.timestamp = new Date();
@@ -46,32 +52,24 @@ public class ChatMessage {
         return messageContent;
     }
     
-    public void setMessageContent(String messageContent) {
-        this.messageContent = messageContent;
+    // ... other getters and setters
+    
+    public UUID getConsultationId() {
+        return consultationId;
     }
     
-    public Date getTimestamp() {
-        return timestamp;
+    public void setConsultationId(UUID consultationId) {
+        this.consultationId = consultationId;
     }
     
-    public void setTimestamp(Date timestamp) {
-        this.timestamp = timestamp;
-    }
-    
-    public UUID getSenderId() {
-        return senderId;
-    }
-    
-    public void setSenderId(UUID senderId) {
-        this.senderId = senderId;
-    }
-    
+    // Other methods
     public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> map = new HashMap<>();
         map.put("id", id);
         map.put("messageContent", messageContent);
         map.put("timestamp", timestamp);
         map.put("senderId", senderId);
+        map.put("consultationId", consultationId);
         return map;
     }
 }

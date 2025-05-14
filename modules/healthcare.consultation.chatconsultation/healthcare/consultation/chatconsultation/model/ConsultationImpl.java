@@ -2,6 +2,14 @@ package healthcare.consultation.chatconsultation;
 
 import java.util.*;
 import healthcare.consultation.chatconsultation.ChatMessage;
+
+import javax.persistence.Entity;
+import javax.persistence.Table;
+import javax.persistence.Column;
+import javax.persistence.OneToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.CascadeType;
+import javax.persistence.FetchType;
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
 
@@ -17,6 +25,8 @@ import healthcare.consultation.core.ConsultationComponent;
 @Table(name="consultation_chatconsultation")
 public class ConsultationImpl extends ConsultationDecorator {
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinColumn(name = "consultation_id")
     public List<ChatMessage> listChatMessages;
     
     public ConsultationImpl() {
