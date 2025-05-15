@@ -27,7 +27,7 @@ public class ConsultationImpl extends ConsultationDecorator {
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinColumn(name = "consultation_id")
-    public List<ChatMessage> listChatMessages;
+    private List<ChatMessage> listChatMessages;
     
     public ConsultationImpl() {
         super();
@@ -85,6 +85,14 @@ public class ConsultationImpl extends ConsultationDecorator {
     @Override
     public void setConsultationStatus(boolean consultationStatus) {
         record.setConsultationStatus(consultationStatus);
+    }
+
+    public List<ChatMessage> getListChatMessages() {
+        return listChatMessages;
+    }
+    
+    public void setListChatMessages(List<ChatMessage> listChatMessages) {
+        this.listChatMessages = listChatMessages;
     }
     
     @Override

@@ -2,11 +2,12 @@ namespace HealthCare
 
 features
 	HealthCare {abstract true}
-		mandatory
+		optional
 			Consultation
 				optional
 					ChatConsultation
 					OfflineConsultation
+		mandatory
 			Information
 				optional
 					HealthArticle

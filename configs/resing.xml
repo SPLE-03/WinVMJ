@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <configuration>
 	<feature automatic="selected" name="HealthCare"/>
-	<feature automatic="selected" name="Consultation"/>
-	<feature manual="selected" name="ChatConsultation"/>
+	<feature name="Consultation"/>
+	<feature name="ChatConsultation"/>
 	<feature name="OfflineConsultation"/>
 	<feature automatic="selected" name="Information"/>
 	<feature manual="selected" name="HealthArticle"/>
