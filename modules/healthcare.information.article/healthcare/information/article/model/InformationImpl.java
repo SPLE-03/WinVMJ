@@ -65,7 +65,15 @@ public class InformationImpl extends InformationDecorator {
     public void setInformationDescription(String informationDescription) {
         record.setInformationDescription(informationDescription);
     }
-    
+
+    public String getContent() {
+        return this.content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
     @Override
     public HashMap<String, Object> toHashMap() {
         HashMap<String, Object> map = record.toHashMap();

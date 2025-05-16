@@ -12,6 +12,7 @@ import healthcare.information.core.InformationComponent;
 import healthcare.information.core.Information;
 import healthcare.information.core.InformationResourceComponent;
 import healthcare.information.InformationFactory;
+import vmj.routing.route.exceptions.*;
 
 public class InformationResourceImpl extends InformationResourceDecorator {
     private InformationServiceImpl informationServiceImpl;
@@ -23,101 +24,57 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 
     // @Restriced(permission = "")
     @Route(url="call/article/save")
-    public List<HashMap<String,Object>> save(VMJExchange vmjExchange){
-        if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-            return null;
+    public HashMap<String,Object> createArticle(VMJExchange vmjExchange){
+        if (vmjExchange.getHttpMethod().equals("POST")) {
+            HashMap<String, Object> requestBody = (HashMap<String, Object>) vmjExchange.getPayload();
+            Information information = informationServiceImpl.saveArticle(requestBody);
+            return information.toHashMap();
         }
-        Information information = create(vmjExchange);
-        // return informationServiceImpl.saveInformation(information);
-        return null;
-    }
-
-    public Information create(VMJExchange vmjExchange){
-        String content = (String) vmjExchange.getRequestBodyForm("content");
-        
-        // Get base information data via the parent implementation
-        HashMap<String, Object> baseInformationData = record.createInformation(vmjExchange);
-        
-        // Extract information from the base data
-        String informationTitle = (String) baseInformationData.get("informationTitle");
-        String informationDescription = (String) baseInformationData.get("informationDescription");
-        
-        // Create the base component
-        InformationComponent baseComponent = new healthcare.information.core.InformationImpl(
-            UUID.randomUUID(),
-            informationTitle,
-            informationDescription
-        );
-        
-        // Create the decorated information
-        Information deco = InformationFactory.createInformation(
-            "healthcare.information.article.InformationImpl", 
-            baseComponent, 
-            content
-        );
-        
-        // return deco;
-        return null;
-    }
-
-    public Information create(VMJExchange vmjExchange, int id){
-        // String content = (String) vmjExchange.getRequestBodyForm("content");
-        // Information saved = Repository.getObject(id);
-        // InformationComponent baseRecord = (InformationComponent) saved;
-        
-        // // Get updated information data
-        // HashMap<String, Object> baseInformationData = record.createInformation(vmjExchange);
-        
-        // // Extract information from the base data
-        // String informationTitle = (String) baseInformationData.get("informationTitle");
-        // String informationDescription = (String) baseInformationData.get("informationDescription");
-        
-        // // Create the base component with existing ID
-        // InformationComponent baseComponent = new healthcare.information.core.InformationImpl(
-        //     baseRecord.getInformationId(),
-        //     informationTitle,
-        //     informationDescription
-        // );
-        
-        // // Create the decorated information
-        // Information deco = InformationFactory.createInformation(
-        //     "healthcare.information.article.InformationImpl", 
-        //     baseComponent, 
-        //     content
-        // );
-        
-        // return deco;
-        return null;
+        throw new NotFoundException("Route tidak ditemukan");
     }
 
     // @Restriced(permission = "")
     @Route(url="call/article/update")
-    public HashMap<String, Object> update(VMJExchange vmjExchange){
-        if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-            return null;
+    public HashMap<String, Object> updateArticle(VMJExchange vmjExchange){
+        if (vmjExchange.getHttpMethod().equals("POST")) {
+            HashMap<String, Object> requestBody = (HashMap<String, Object>) vmjExchange.getPayload();
+            Information information = informationServiceImpl.updateArticle(requestBody);
+            return information.toHashMap();
         }
-        // String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        // int id = Integer.parseInt(idStr);
-        
-        // Information information = Repository.getObject(id);
-        // information = create(vmjExchange, id);
-        
-        // return informationServiceImpl.updateInformation(information);
-        return null;
+        throw new NotFoundException("Route tidak ditemukan");
     }
 
     // @Restriced(permission = "")
     @Route(url="call/article/detail")
-    public HashMap<String, Object> get(VMJExchange vmjExchange){
-        // return record.getInformation(vmjExchange);
-        return null;
+    public HashMap<String, Object> getArticle(VMJExchange vmjExchange){
+        if (vmjExchange.getHttpMethod().equals("GET")) {
+            String id = (String) vmjExchange.getGETParam("id");
+            Information information = informationServiceImpl.getArticle(UUID.fromString(id));
+            return information.toHashMap();
+        }
+        throw new NotFoundException("Route tidak ditemukan");
     }
 
     // @Restriced(permission = "")
     @Route(url="call/article/list")
-    public List<HashMap<String,Object>> getAll(VMJExchange vmjExchange){
-        // return informationServiceImpl.getAllInformation();
-        return null;
+    public List<HashMap<String, Object>> getAllArticle(VMJExchange vmjExchange) {
+        if (vmjExchange.getHttpMethod().equals("GET")) {
+            List<Information> information = informationServiceImpl.getAllArticle();
+            return transformListToHashMap(information);
+        }
+        throw new NotFoundException("Route tidak ditemukan");
+    }
+    
+    // @Restriced(permission = "")
+    @Route(url="call/article/delete")
+    public List<HashMap<String, Object>> deleteArticle(VMJExchange vmjExchange) {
+        if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+            return null;
+        }
+        
+        UUID id = UUID.fromString((String) vmjExchange.getRequestBodyForm("id"));
+        List<Information> information = informationServiceImpl.deleteArticle(id);
+        return transformListToHashMap(information);
     }
 
     public List<HashMap<String,Object>> transformListToHashMap(List<Information> list){
@@ -125,20 +82,6 @@ public class InformationResourceImpl extends InformationResourceDecorator {
         for(int i = 0; i < list.size(); i++) {
             resultList.add(list.get(i).toHashMap());
         }
-        // return resultList;
-        return null;
-    }
-
-    // @Restriced(permission = "")
-    @Route(url="call/article/delete")
-    public List<HashMap<String,Object>> deleteInformation(VMJExchange vmjExchange){
-        if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-            return null;
-        }
-        
-        String idStr = (String) vmjExchange.getRequestBodyForm("id");
-        int id = Integer.parseInt(idStr);
-        // return informationServiceImpl.deleteInformation(id);
-        return null;
+        return resultList;
     }
 }
