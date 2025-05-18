@@ -15,7 +15,7 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 
 	public InformationResourceImpl(InformationResourceComponent record, InformationServiceComponent informationServiceImpl) {
 		super(record);
-		this.informationServiceImpl = informationServiceImpl;
+		this.informationServiceImpl = new InformationServiceImpl(informationServiceImpl);
 	}
 
     // @Restriced(permission = "")
