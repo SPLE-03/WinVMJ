@@ -7,12 +7,13 @@ import vmj.routing.route.VMJExchange;
 import healthcare.information.core.InformationResourceDecorator;
 import healthcare.information.core.InformationImpl;
 import healthcare.information.core.Information;
+import healthcare.information.core.InformationServiceComponent;
 import healthcare.information.core.InformationResourceComponent;
 
 public class InformationResourceImpl extends InformationResourceDecorator {
 	private InformationServiceImpl informationServiceImpl;
 
-	public InformationResourceImpl(InformationResourceComponent record, InformationServiceImpl informationServiceImpl) {
+	public InformationResourceImpl(InformationResourceComponent record, InformationServiceComponent informationServiceImpl) {
 		super(record);
 		this.informationServiceImpl = informationServiceImpl;
 	}
