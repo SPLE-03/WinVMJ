@@ -17,6 +17,15 @@
   "FacilityLocation": [
     "healthcare.information.facilitylocation"
   ],
+  "VaccineInfo": [
+    "healthcare.information.vaccineinfo"
+  ],
+  "DoctorInformation": [
+    "healthcare.information.doctorinformation"
+  ],
+  "DrugInformation": [
+    "healthcare.information.druginformation"
+  ],
   "Report": [
     "healthcare.report.core"
   ],
