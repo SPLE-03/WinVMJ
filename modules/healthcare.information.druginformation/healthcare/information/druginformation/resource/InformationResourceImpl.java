@@ -17,10 +17,6 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 		this.informationServiceImpl = informationServiceImpl;
 	}
 
-    public InformationResourceImpl (InformationResourceComponent record) {
-        super(record);
-    }
-
     // @Restriced(permission = "")
     // @Route(url="call/druginformation/save")
     // public HashMap<String, Object> save(VMJExchange vmjExchange){
