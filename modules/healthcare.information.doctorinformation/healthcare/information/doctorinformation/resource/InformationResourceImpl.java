@@ -7,10 +7,14 @@ import vmj.routing.route.VMJExchange;
 import healthcare.information.core.InformationResourceDecorator;
 import healthcare.information.core.InformationImpl;
 import healthcare.information.core.InformationResourceComponent;
+import healthcare.information.core.InformationResourceComponent;
 
 public class InformationResourceImpl extends InformationResourceDecorator {
-    public InformationResourceImpl (InformationResourceComponent record) {
+	 private InformationServiceImpl informationServiceImpl;
+	 
+    public InformationResourceImpl (InformationResourceComponent record, InformationServiceComponent informationServiceImpl) {
         super(record);
+        this.informationServiceImpl = new InformationServiceImpl(informationServiceImpl);
     }
 
     // @Restriced(permission = "")
