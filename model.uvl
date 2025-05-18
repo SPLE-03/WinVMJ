@@ -11,7 +11,10 @@ features
 			Information
 				optional
 					HealthArticle
+					DoctorInformation
 					FacilityLocation
+					VaccineInfo
+					DrugInformation
 		optional
 			Report {abstract true}
 				optional

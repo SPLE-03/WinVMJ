@@ -6,7 +6,10 @@
 	<feature name="OfflineConsultation"/>
 	<feature automatic="selected" name="Information"/>
 	<feature manual="selected" name="HealthArticle"/>
+	<feature name="DoctorInformation"/>
 	<feature name="FacilityLocation"/>
+	<feature name="VaccineInfo"/>
+	<feature name="DrugInformation"/>
 	<feature name="Report"/>
 	<feature name="PatientReport"/>
 	<feature name="DoctorReport"/>

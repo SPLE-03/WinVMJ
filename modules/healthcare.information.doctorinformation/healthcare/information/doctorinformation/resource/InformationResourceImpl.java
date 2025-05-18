@@ -3,91 +3,92 @@ import java.util.*;
 
 import vmj.routing.route.Route;
 import vmj.routing.route.VMJExchange;
+import vmj.hibernate.integrator.RepositoryUtil;
 
 import healthcare.information.core.InformationResourceDecorator;
+import healthcare.information.core.InformationServiceComponent;
 import healthcare.information.core.InformationImpl;
 import healthcare.information.core.InformationResourceComponent;
-import healthcare.information.core.InformationResourceComponent;
+import healthcare.information.core.InformationComponent;
+import healthcare.information.core.Information;
+import healthcare.information.InformationFactory;
+import vmj.routing.route.exceptions.*;
 
 public class InformationResourceImpl extends InformationResourceDecorator {
-	 private InformationServiceImpl informationServiceImpl;
 	 
-    public InformationResourceImpl (InformationResourceComponent record, InformationServiceComponent informationServiceImpl) {
+	private InformationServiceImpl informationServiceImpl;
+
+	public InformationResourceImpl (InformationResourceComponent record, InformationServiceComponent informationServiceImpl, InformationServiceComponent informationServiceImpl) {
         super(record);
-        this.informationServiceImpl = new InformationServiceImpl(informationServiceImpl);
+		this.informationServiceImpl = new InformationServiceImpl(informationServiceImpl);
     }
 
     // @Restriced(permission = "")
     @Route(url="call/doctorinformation/save")
-    public List<HashMap<String,Object>> save(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
+    public HashMap<String,Object> createInformationDoctor(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+            HashMap<String, Object> requestBody = (HashMap<String, Object>) vmjExchange.getPayload();
+            Information information = informationServiceImpl.saveDoctor(requestBody);
+            return information.toHashMap();
 		}
-		InformationDoctorInformation informationdoctorinformation = createInformationDoctorInformation(vmjExchange);
-		informationdoctorinformationRepository.saveObject(informationdoctorinformation);
-		return getAllInformationDoctorInformation(vmjExchange);
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public Information createInformationDoctorInformation(VMJExchange vmjExchange){
-		String specialist = (String) vmjExchange.getRequestBodyForm("specialist");
+    // public Information createInformationDoctorInformation(VMJExchange vmjExchange){
+	// 	String specialist = (String) vmjExchange.getRequestBodyForm("specialist");
 		
-		InformationDoctorInformation informationdoctorinformation = record.createInformationDoctorInformation(vmjExchange);
-		InformationDoctorInformation informationdoctorinformationdeco = InformationDoctorInformationFactory.createInformationDoctorInformation("healthcare.doctorinformation.core.InformationImpl", informationdoctorinformation, informationId, informationTitle, informationDescription
-		specialist
-		);
-			return informationdoctorinformationdeco;
-	}
+	// 	InformationDoctorInformation informationdoctorinformation = record.createInformationDoctorInformation(vmjExchange);
+	// 	InformationDoctorInformation informationdoctorinformationdeco = InformationDoctorInformationFactory.createInformationDoctorInformation("healthcare.doctorinformation.core.InformationImpl", informationdoctorinformation, informationId, informationTitle, informationDescription, specialist);
+	// 		return informationdoctorinformationdeco;
+	// }
 
 
-    public Information createInformationDoctorInformation(VMJExchange vmjExchange, int id){
-		String specialist = (String) vmjExchange.getRequestBodyForm("specialist");
-		InformationDoctorInformation informationdoctorinformation = informationdoctorinformationRepository.getObject(id);
-		int recordInformationDoctorInformationId = (((InformationDoctorInformationDecorator) savedInformationDoctorInformation.getRecord()).getId();
+    // public Information createInformationDoctorInformation(VMJExchange vmjExchange, int id){
+	// 	String specialist = (String) vmjExchange.getRequestBodyForm("specialist");
+	// 	InformationDoctorInformation informationdoctorinformation = informationdoctorinformationRepository.getObject(id);
+	// 	int recordInformationDoctorInformationId = (((InformationDoctorInformationDecorator) savedInformationDoctorInformation.getRecord()).getId());
 		
-		InformationDoctorInformation informationdoctorinformation = record.createInformationDoctorInformation(vmjExchange);
-		InformationDoctorInformation informationdoctorinformationdeco = InformationDoctorInformationFactory.createInformationDoctorInformation("healthcare.doctorinformation.core.InformationImpl", id, informationdoctorinformation, informationId, informationTitle, informationDescription
-		specialist
-		);
-			return informationdoctorinformationdeco;
-	}
+	// 	InformationDoctorInformation informationdoctorinformation = record.createInformationDoctorInformation(vmjExchange);
+	// 	InformationDoctorInformation informationdoctorinformationdeco = InformationDoctorInformationFactory.createInformationDoctorInformation("healthcare.doctorinformation.core.InformationImpl", id, informationdoctorinformation, informationId, informationTitle, informationDescription, specialist);
+	// 		return informationdoctorinformationdeco;
+	// }
 
 	// @Restriced(permission = "")
     @Route(url="call/doctorinformation/update")
-    public HashMap<String, Object> updateInformationDoctorInformation(VMJExchange vmjExchange){
-		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
+    public HashMap<String, Object> updateInformationDoctor(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("POST")) {
+			HashMap<String, Object> requestBody = (HashMap<String, Object>) vmjExchange.getPayload();
+            Information information = informationServiceImpl.updateDoctor(requestBody);
+            return information.toHashMap();
 		}
-		String idStr = (String) vmjExchange.getRequestBodyForm("informationId");
-		int id = Integer.parseInt(idStr);
-		
-		InformationDoctorInformation informationdoctorinformation = informationdoctorinformationRepository.getObject(id);
-		informationdoctorinformation = createInformationDoctorInformation(vmjExchange, id);
-		
-		informationdoctorinformationRepository.updateObject(informationdoctorinformation);
-		informationdoctorinformation = informationdoctorinformationRepository.getObject(id);
-		//to do: fix association attributes
-		
-		return informationdoctorinformation.toHashMap();
-		
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/doctorinformation/detail")
-    public HashMap<String, Object> getInformationDoctorInformation(VMJExchange vmjExchange){
-		return record.getInformationDoctorInformation(vmjExchange);
+    public HashMap<String, Object> getInformationDoctor(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("GET")) {
+			String id = (String) vmjExchange.getGETParam("id");
+			Information information = informationServiceImpl.getDoctor(UUID.fromString(id));
+			return information.toHashMap();
+		}
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/doctorinformation/list")
-    public List<HashMap<String,Object>> getAllInformationDoctorInformation(VMJExchange vmjExchange){
-		List<InformationDoctorInformation> informationdoctorinformationList = informationdoctorinformationRepository.getAllObject("informationdoctorinformation_impl");
-		return transformInformationDoctorInformationListToHashMap(informationdoctorinformationList);
+    public List<HashMap<String,Object>> getAllDoctor(VMJExchange vmjExchange){
+		if (vmjExchange.getHttpMethod().equals("GET")) {
+			List<Information> information = informationServiceImpl.getAllDoctor();
+			return transformListToHashMap(information);
+		}
+		throw new NotFoundException("Route tidak ditemukan");
 	}
 
-    public List<HashMap<String,Object>> transformInformationDoctorInformationListToHashMap(List<InformationDoctorInformation> InformationDoctorInformationList){
+    public List<HashMap<String,Object>> transformListToHashMap(List<Information> list){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
-        for(int i = 0; i < InformationDoctorInformationList.size(); i++) {
-            resultList.add(InformationDoctorInformationList.get(i).toHashMap());
+        for(int i = 0; i < list.size(); i++) {
+            resultList.add(list.get(i).toHashMap());
         }
 
         return resultList;
@@ -95,15 +96,14 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 
 	// @Restriced(permission = "")
     @Route(url="call/doctorinformation/delete")
-    public List<HashMap<String,Object>> deleteInformationDoctorInformation(VMJExchange vmjExchange){
+    public List<HashMap<String,Object>> deleteInformationDoctor(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
 		
-		String idStr = (String) vmjExchange.getRequestBodyForm("informationId");
-		int id = Integer.parseInt(idStr);
-		informationdoctorinformationRepository.deleteObject(id);
-		return getAllInformationDoctorInformation(vmjExchange);
+		UUID id = UUID.fromString((String) vmjExchange.getRequestBodyForm("id"));
+		List<Information> information = informationServiceImpl.deleteDoctor(id);
+		return transformListToHashMap(information);
 	}
 
 	

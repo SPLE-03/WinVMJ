@@ -16,8 +16,10 @@ import healthcare.information.core.InformationComponent;
 @Table(name="information_doctorinformation")
 public class InformationImpl extends InformationDecorator {
 
+	@Column(name="specialist", columnDefinition="TEXT")
 	public String specialist;
-	public InformationImpl(
+
+	public InformationImpl() {
         super();
         this.objectName = InformationImpl.class.getName();
     }
@@ -34,6 +36,49 @@ public class InformationImpl extends InformationDecorator {
 		this.objectName = InformationImpl.class.getName();
 	}
 
+	@Override
+    public UUID getInformationId() {
+        return record.getInformationId();
+    }
 
+    @Override
+    public void setInformationId(UUID informationId) {
+        record.setInformationId(informationId);
+    }
+
+    @Override
+    public String getInformationTitle() {
+        return record.getInformationTitle();
+    }
+
+    @Override
+    public void setInformationTitle(String informationTitle) {
+        record.setInformationTitle(informationTitle);
+    }
+
+    @Override
+    public String getInformationDescription() {
+        return record.getInformationDescription();
+    }
+
+    @Override
+    public void setInformationDescription(String informationDescription) {
+        record.setInformationDescription(informationDescription);
+    }
+
+    public String getSpecialist() {
+        return this.specialist;
+    }
+
+    public void setSpecialist(String specialist) {
+        this.specialist = specialist;
+    }
+
+    @Override
+    public HashMap<String, Object> toHashMap() {
+        HashMap<String, Object> map = record.toHashMap();
+        map.put("specialist", specialist);
+        return map;
+    }
 
 }
