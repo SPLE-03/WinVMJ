@@ -23,13 +23,8 @@ public class InformationServiceImpl extends InformationServiceDecorator {
         String informationTitle = (String) requestBody.get("informationTitle");
         String informationDescription = (String) requestBody.get("informationDescription");
 
-        // Create the base component
-        InformationComponent baseComponent = new healthcare.information.core.InformationImpl(
-            UUID.randomUUID(),
-            informationTitle,
-            informationDescription
-        );
-
+        Information baseComponent = record.createInformation(requestBody);
+        
         // Create the decorated information
         Information deco = InformationFactory.createInformation(
             "healthcare.information.article.InformationImpl", 
