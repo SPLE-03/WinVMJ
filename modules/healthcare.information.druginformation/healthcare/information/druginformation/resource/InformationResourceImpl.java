@@ -6,45 +6,41 @@ import vmj.routing.route.VMJExchange;
 
 import healthcare.information.core.InformationResourceDecorator;
 import healthcare.information.core.InformationImpl;
+import healthcare.information.core.Information;
 import healthcare.information.core.InformationResourceComponent;
 
 public class InformationResourceImpl extends InformationResourceDecorator {
+	private InformationServiceImpl informationServiceImpl;
+
+	public InformationResourceImpl(InformationResourceComponent record, InformationServiceImpl informationServiceImpl) {
+		super(record);
+		this.informationServiceImpl = informationServiceImpl;
+	}
+
     public InformationResourceImpl (InformationResourceComponent record) {
         super(record);
     }
 
     // @Restriced(permission = "")
-    @Route(url="call/druginformation/save")
-    public List<HashMap<String,Object>> save(VMJExchange vmjExchange){
+    // @Route(url="call/druginformation/save")
+    // public HashMap<String, Object> save(VMJExchange vmjExchange){
+	// 	if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
+	// 		return null;
+	// 	}
+	// 	Information informationdruginformation = createInformationDrugInformation(vmjExchange);
+	// 	Repository.saveObject(informationdruginformation);
+	// 	return getAllInformationDrugInformation(vmjExchange);
+	// }
+
+	@Route(url="call/druginformation/save")
+    public HashMap<String, Object> createInformationDrugInformation(VMJExchange vmjExchange){
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
-			return null;
-		}
-		InformationDrugInformation informationdruginformation = createInformationDrugInformation(vmjExchange);
-		informationdruginformationRepository.saveObject(informationdruginformation);
-		return getAllInformationDrugInformation(vmjExchange);
-	}
+            return null;
+        }
 
-    public Information createInformationDrugInformation(VMJExchange vmjExchange){
-		String dosage = (String) vmjExchange.getRequestBodyForm("dosage");
-		
-		InformationDrugInformation informationdruginformation = record.createInformationDrugInformation(vmjExchange);
-		InformationDrugInformation informationdruginformationdeco = InformationDrugInformationFactory.createInformationDrugInformation("healthcare.druginformation.core.InformationImpl", informationdruginformation, informationId, informationTitle, informationDescription
-		dosage
-		);
-			return informationdruginformationdeco;
-	}
-
-
-    public Information createInformationDrugInformation(VMJExchange vmjExchange, int id){
-		String dosage = (String) vmjExchange.getRequestBodyForm("dosage");
-		InformationDrugInformation informationdruginformation = informationdruginformationRepository.getObject(id);
-		int recordInformationDrugInformationId = (((InformationDrugInformationDecorator) savedInformationDrugInformation.getRecord()).getId();
-		
-		InformationDrugInformation informationdruginformation = record.createInformationDrugInformation(vmjExchange);
-		InformationDrugInformation informationdruginformationdeco = InformationDrugInformationFactory.createInformationDrugInformation("healthcare.druginformation.core.InformationImpl", id, informationdruginformation, informationId, informationTitle, informationDescription
-		dosage
-		);
-			return informationdruginformationdeco;
+		HashMap<String, Object> requestBody = (HashMap<String, Object>) vmjExchange.getPayload();
+		Information information = informationServiceImpl.createDrugInformation(requestBody);
+		return information.toHashMap();
 	}
 
 	// @Restriced(permission = "")
@@ -53,34 +49,28 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 		if (vmjExchange.getHttpMethod().equals("OPTIONS")) {
 			return null;
 		}
-		String idStr = (String) vmjExchange.getRequestBodyForm("informationId");
-		int id = Integer.parseInt(idStr);
-		
-		InformationDrugInformation informationdruginformation = informationdruginformationRepository.getObject(id);
-		informationdruginformation = createInformationDrugInformation(vmjExchange, id);
-		
-		informationdruginformationRepository.updateObject(informationdruginformation);
-		informationdruginformation = informationdruginformationRepository.getObject(id);
-		//to do: fix association attributes
-		
-		return informationdruginformation.toHashMap();
+		HashMap<String, Object> requestBody = (HashMap<String, Object>) vmjExchange.getPayload();
+		Information information = informationServiceImpl.updateDrugInformation(requestBody);
+		return information.toHashMap();
 		
 	}
 
 	// @Restriced(permission = "")
     @Route(url="call/druginformation/detail")
     public HashMap<String, Object> getInformationDrugInformation(VMJExchange vmjExchange){
-		return record.getInformationDrugInformation(vmjExchange);
-	}
+		String id = (String) vmjExchange.getGETParam("id");
+		Information information = informationServiceImpl.getDrugInformation(UUID.fromString(id));
+		return information.toHashMap();
+}
 
 	// @Restriced(permission = "")
     @Route(url="call/druginformation/list")
     public List<HashMap<String,Object>> getAllInformationDrugInformation(VMJExchange vmjExchange){
-		List<InformationDrugInformation> informationdruginformationList = informationdruginformationRepository.getAllObject("informationdruginformation_impl");
-		return transformInformationDrugInformationListToHashMap(informationdruginformationList);
+		List<Information> information = informationServiceImpl.getAllDrugInformation();
+        return transformListToHashMap(information);
 	}
 
-    public List<HashMap<String,Object>> transformInformationDrugInformationListToHashMap(List<InformationDrugInformation> InformationDrugInformationList){
+    public List<HashMap<String,Object>> transformInformationDrugInformationListToHashMap(List<InformationImpl> InformationDrugInformationList){
 		List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
         for(int i = 0; i < InformationDrugInformationList.size(); i++) {
             resultList.add(InformationDrugInformationList.get(i).toHashMap());
@@ -96,11 +86,16 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 			return null;
 		}
 		
-		String idStr = (String) vmjExchange.getRequestBodyForm("informationId");
-		int id = Integer.parseInt(idStr);
-		informationdruginformationRepository.deleteObject(id);
-		return getAllInformationDrugInformation(vmjExchange);
+		UUID id = UUID.fromString((String) vmjExchange.getRequestBodyForm("id"));
+        List<Information> information = informationServiceImpl.deleteDrugInformation(id);
+        return transformListToHashMap(information);
 	}
 
-	
+	public List<HashMap<String,Object>> transformListToHashMap(List<Information> list){
+        List<HashMap<String,Object>> resultList = new ArrayList<HashMap<String,Object>>();
+        for(int i = 0; i < list.size(); i++) {
+            resultList.add(list.get(i).toHashMap());
+        }
+        return resultList;
+    }
 }
