@@ -14,8 +14,8 @@
   "HealthArticle": [
     "healthcare.information.article"
   ],
-  "FacilityLocation": [
-    "healthcare.information.facilitylocation"
+  "HealthFacilities": [
+    "healthcare.information.healthfacilities"
   ],
   "VaccineInfo": [
     "healthcare.information.vaccineinfo"

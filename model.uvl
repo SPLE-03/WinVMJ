@@ -15,6 +15,7 @@ features
 					FacilityLocation
 					VaccineInfo
 					DrugInformation
+					HealthFacilities
 		optional
 			Report {abstract true}
 				optional

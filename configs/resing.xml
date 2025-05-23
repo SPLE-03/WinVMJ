@@ -10,6 +10,7 @@
 	<feature name="FacilityLocation"/>
 	<feature name="VaccineInfo"/>
 	<feature name="DrugInformation"/>
+	<feature name="HealthFacilities"/>
 	<feature name="Report"/>
 	<feature name="PatientReport"/>
 	<feature name="DoctorReport"/>
