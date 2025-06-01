@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature automatic="selected" name="HealthCare"/>
+	<feature name="Consultation"/>
+	<feature name="ChatConsultation"/>
+	<feature name="OfflineConsultation"/>
+	<feature automatic="selected" name="Information"/>
+	<feature manual="selected" name="HealthArticle"/>
+	<feature manual="selected" name="DoctorInformation"/>
+	<feature name="FacilityLocation"/>
+	<feature manual="selected" name="VaccineInfo"/>
+	<feature manual="selected" name="DrugInformation"/>
+	<feature name="Report"/>
+	<feature name="PatientReport"/>
+	<feature name="DoctorReport"/>
+	<feature name="SpecialServices"/>
+	<feature name="InHouseDoctor"/>
+	<feature name="Emergency"/>
+	<feature name="ComplaintService"/>
+	<feature name="ConsultationComplaint"/>
+	<feature name="SpecialServiceComplaint"/>
+</configuration>

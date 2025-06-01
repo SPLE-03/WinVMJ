@@ -18,7 +18,7 @@ public class InformationResourceImpl extends InformationResourceDecorator {
 	 
 	private InformationServiceImpl informationServiceImpl;
 
-	public InformationResourceImpl (InformationResourceComponent record, InformationServiceComponent informationServiceImpl, InformationServiceComponent informationServiceImpl) {
+	public InformationResourceImpl (InformationResourceComponent record, InformationServiceComponent informationServiceImpl) {
         super(record);
 		this.informationServiceImpl = new InformationServiceImpl(informationServiceImpl);
     }
