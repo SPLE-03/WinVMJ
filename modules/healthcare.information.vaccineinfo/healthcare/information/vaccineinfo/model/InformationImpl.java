@@ -99,10 +99,12 @@ public class InformationImpl extends InformationDecorator {
         this.schedule = schedule;
     }
 
-    // @Override
-    // public HashMap<String, Object> toHashMap() {
-    //     HashMap<String, Object> map = record.toHashMap();
-    //     map.put("content", content);
-    //     return map;
-    // }
+    @Override
+    public HashMap<String, Object> toHashMap() {
+        HashMap<String, Object> map = record.toHashMap();
+        map.put("schedule", schedule);
+        map.put("type", type);
+        map.put("vaccinationLocation", vaccinationLocation);
+        return map;
+    }
 }
