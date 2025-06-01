@@ -2,34 +2,13 @@ namespace HealthCare
 
 features
 	HealthCare {abstract true}
-		optional
-			Consultation
-				optional
-					ChatConsultation
-					OfflineConsultation
 		mandatory
 			Information
-				optional
+				mandatory
 					HealthArticle
+					HealthFacilities
+				optional
 					DoctorInformation
-					FacilityLocation
 					VaccineInfo
 					DrugInformation
-					HealthFacilities
-		optional
-			Report {abstract true}
-				optional
-					PatientReport
-					DoctorReport
-			SpecialServices {abstract true}
-				optional
-					InHouseDoctor
-					Emergency
-			ComplaintService {abstract true}
-				mandatory
-					ConsultationComplaint
-				optional
-					SpecialServiceComplaint
 
-constraints
-	SpecialServiceComplaint => SpecialServices

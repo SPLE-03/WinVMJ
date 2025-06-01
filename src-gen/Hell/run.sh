@@ -18,9 +18,9 @@ tail -f java.log --pid=$TEE_PID | while read -r LINE; do
     fi
 done
 
-echo "SELECT 'CREATE DATABASE healthcare_product_hell' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'healthcare_product_hell') \gexec" | psql "postgresql://postgres:MacKebun134@localhost"
+echo "SELECT 'CREATE DATABASE healthcare_product_hell' WHERE NOT EXISTS (SELECT FROM pg_database WHERE datname = 'healthcare_product_hell') \gexec" | psql "postgresql://postgres:postgres@localhost"
 for file in sql/*.sql; do
-    psql -a -f "$file" "postgresql://postgres:MacKebun134@localhost/healthcare_product_hell"
+    psql -a -f "$file" "postgresql://postgres:postgres@localhost/healthcare_product_hell"
 done
 
 wait
