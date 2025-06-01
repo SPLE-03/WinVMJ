@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configuration>
+	<feature automatic="selected" name="HealthCare"/>
+	<feature automatic="selected" name="Information"/>
+	<feature automatic="selected" name="HealthArticle"/>
+	<feature automatic="selected" name="HealthFacilities"/>
+	<feature name="DoctorInformation"/>
+	<feature name="VaccineInfo"/>
+	<feature name="DrugInformation"/>
+</configuration>
